@@ -10,8 +10,13 @@ const SPOTIFY_SCOPE = [
 
 const REDIRECT_URI = window.location.origin;
 
+export interface RootState {
+  authentication: AuthState;
+}
+
 export interface AuthState {
   accessToken?: string;
+  isLoggingOut: boolean;
 }
 
 export interface AccessTokenPayload {
@@ -20,24 +25,29 @@ export interface AccessTokenPayload {
 
 const initialState: AuthState = {
   accessToken: undefined,
+  isLoggingOut: false,
 };
 
 const authSlice = createSlice({
   name: "authentication",
   initialState,
   reducers: {
-    login() {
+    login(state) {
       const { REACT_APP_SPOTIFY_CLIENT_ID } = process.env;
       const scopes: string = SPOTIFY_SCOPE.join(",");
+      state.isLoggingOut = false;
 
       window.location.href = `https://accounts.spotify.com/me/authorize?client_id=${REACT_APP_SPOTIFY_CLIENT_ID}&response_type=token&redirect_uri=${REDIRECT_URI}&scope=${scopes}`;
     },
     logout(state) {
       state.accessToken = undefined;
-      window.location.href = 'https://accounts.spotify.com/en/logout';
+      state.isLoggingOut = true;
+      localStorage.removeItem("accessToken");
+      window.location.href = 'https://accounts.spotify.com/logout';
     },
     setAccessToken(state, action: PayloadAction<AccessTokenPayload>) {
       state.accessToken = action.payload.accessToken;
+      state.isLoggingOut = false;
       window.history.pushState({ REDIRECT_URI }, "", REDIRECT_URI);
     },
   },

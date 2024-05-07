@@ -20,7 +20,7 @@ const App: FC = (): ReactElement => {
 
   return (
     <div>
-      <NavigationBar accessToken={accessToken} />
+      <NavigationBar />
       <Header accessToken={accessToken}/>
     </div>
   );
