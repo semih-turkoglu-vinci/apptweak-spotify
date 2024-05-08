@@ -35,7 +35,7 @@ export const apiSlice = createApi({
     }),
     getPlaylistTracks: builder.query<SpotifyTrack, string>({
       query: (playlistRef) => ({
-        url: `${playlistRef}/tracks`,
+        url: `/playlists/${playlistRef}/tracks`,
         method: "GET",
       }),
     }),

@@ -14,7 +14,11 @@ export interface RootState {
   authentication: AuthState;
 }
 
-export interface AuthState {
+export interface DarkModeState {
+  darkMode: boolean;
+}
+
+export interface AuthState extends DarkModeState {
   accessToken?: string;
   isLoggingOut: boolean;
 }
@@ -26,6 +30,7 @@ export interface AccessTokenPayload {
 const initialState: AuthState = {
   accessToken: undefined,
   isLoggingOut: false,
+  darkMode: true,
 };
 
 const authSlice = createSlice({
