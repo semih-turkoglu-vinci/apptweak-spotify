@@ -27,8 +27,13 @@ const Playlists: FC<PlaylistsProps> = ({ accessToken }): ReactElement => {
     control: (provided: any) => ({
       ...provided,
       width: "25%"
-    })
-  };
+    }),
+    menu: (provided: any) => ({
+      ...provided,
+      width: "25%"
+    }),
+    }
+  ;
 
   const handlePlaylistChange = (selectedOption: any) => {
     setSelectedPlaylistId(selectedOption.value);
@@ -36,28 +41,37 @@ const Playlists: FC<PlaylistsProps> = ({ accessToken }): ReactElement => {
 
   return (
     <div>
-      <h1>Playlists</h1>
+      <h2>Choose your playlist</h2>
       <Select options={options} styles={customStyles} onChange={handlePlaylistChange} />
       <h2>Tracks</h2>
-      <table>
+      <div className="col">
+      <table className={"table table-hover"}>
         <thead>
           <tr>
+            <th>#</th>
             <th>Cover</th>
-            <th>Name</th>
-            <th>Artists</th>
+            <th>Name and artists</th>
+            <th>Album</th>
+            <th>Release date</th>
+            <th>Duration</th>
           </tr>
         </thead>
         <tbody>
-          {playlistTracks?.items ? playlistTracks.items.map((track) => (
+          {playlistTracks?.items ? playlistTracks.items.map((track, index) => (
             <Song
               key={track.track.id}
               name={track.track.name}
               artists={track.track.artists.map((artist) => artist.name)}
               coverUrl={track.track.album.images[0].url}
+              position={index + 1}
+              album={track.track.album.name}
+              releaseDate={track.track.album.release_date}
+              duration={track.track.duration_ms}
             />
           )) : null}
         </tbody>
       </table>
+      </div>
     </div>
   );
 };
