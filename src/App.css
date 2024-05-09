@@ -3,7 +3,16 @@
 }
 
 :root {
-  --background-color: #03045e;
+  --color-background-light: #FFFFFF;
+  --color-text-light: #000000;
+
+  --color-background-dark: #000000;
+  --color-text-dark: #FFFFFF;
+}
+
+body{
+  background-color: var(--color-background);
+  color: var(--color-text);
 }
 
 .dropdown {
@@ -15,8 +24,8 @@
   display: none;
   position: absolute;
   background-color: #f9f9f9;
-  min-width: 50vw;
-  max-width: 50vw;
+  min-width: 40vw;
+  max-width: 40vw;
   max-height: 50vh;
   overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -42,12 +51,29 @@
 }
 
 .search-input {
-  width: 50vw;
+  width: 40vw;
+  border-color: gray;
 }
 
 .input-group {
   position: relative;
 }
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-left: 15px;
+}
+
+.search-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+
+
 
 
 
