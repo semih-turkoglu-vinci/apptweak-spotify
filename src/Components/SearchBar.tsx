@@ -1,56 +1,52 @@
-import React, { FC, useState } from 'react';
-import Select from 'react-select';
-import { useGetSearchTrackResultQuery } from '../api/apiSlice';
+import React, { FC, useState } from "react";
+import { useGetSearchTrackResultQuery } from "../api/apiSlice";
 
-interface SearchBarProps {
-  accessToken: string | undefined;
-}
-
-const SearchBar: FC<SearchBarProps> = ({accessToken}) => {
-  const [searchValue, setSearchValue] = useState('');
-  const [selectedTrackId, setSelectedTrackId] = useState('');
-
+const SearchBar: FC = () => {
+  const [searchValue, setSearchValue] = useState("");
   const { data: searchResults } = useGetSearchTrackResultQuery(searchValue, {
-    skip: !searchValue || !accessToken
+    skip: !searchValue
   });
-
-  const options = searchResults ? searchResults?.map((track => ({
-      value: track.id,
-      label: track.name
-    }))).flat()
-    : []
-
-  const customStyles = {
-      control: (provided: any) => ({
-        ...provided,
-        width: "50%"
-      }),
-      menu: (provided: any) => ({
-        ...provided,
-        width: "50%"
-      }),
-    }
-  ;
-
-  const handleInputChange = (selectedOption: any) => {
-    setSelectedTrackId(selectedOption.value);
-  };
 
   const handleSearchChange = (event: any) => {
     setSearchValue(event.target.value);
   };
 
   return (
-    <div>
-      <input type="text" onChange={handleSearchChange} placeholder="Search..." />
-
-      <Select
-        options={options}
-        styles={customStyles}
-        onChange={handleInputChange}
-        placeholder="Select..."
-      />
-
+      <div className="input-group mb-3 dropdown">
+        <input
+          type="text"
+          className="search-input"
+          onChange={handleSearchChange}
+          placeholder="Search for a track"
+        />
+        <button className="dropbtn">Search</button>
+      {searchResults && (
+        <div className="dropdown-content">
+            <table className="table">
+              <thead>
+              <tr>
+                <th>Cover</th>
+                <th>Name and Artists</th>
+                <th>Album</th>
+              </tr>
+              </thead>
+              <tbody>
+              {searchResults.map((track) => (
+                <tr key={track.id}>
+                  <td>
+                    <img src={track.album.images[0].url} alt={track.name} width="50" height="50" />
+                  </td>
+                  <td>
+                    <strong>{track.name}</strong><br/>
+                    {track.artists.map((artist) => artist.name).join(", ")}
+                  </td>
+                  <td>{track.album.name}</td>
+                </tr>
+              ))}
+              </tbody>
+            </table>
+          </div>
+      )}
     </div>
   );
 };

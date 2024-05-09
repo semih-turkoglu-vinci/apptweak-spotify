@@ -13,7 +13,7 @@ const App: FC = (): ReactElement => {
   return (
     <div>
       <Header accessToken={accessToken}/>
-      <SearchBar accessToken={accessToken}/>
+      <SearchBar />
       <Playlists accessToken={accessToken}/>
     </div>
   );
