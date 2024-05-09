@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, useState } from "react";
 import { useGetPlaylistsQuery, useGetPlaylistTracksQuery } from "../api/apiSlice";
 import Select from "react-select";
-import Song from "./Song";
+import Tracks from "./Tracks";
 
 interface PlaylistsProps {
   accessToken: string | undefined;
@@ -58,7 +58,7 @@ const Playlists: FC<PlaylistsProps> = ({ accessToken }): ReactElement => {
         </thead>
         <tbody>
           {playlistTracks?.items ? playlistTracks.items.map((track, index) => (
-            <Song
+            <Tracks
               key={track.track.id}
               name={track.track.name}
               artists={track.track.artists.map((artist) => artist.name)}

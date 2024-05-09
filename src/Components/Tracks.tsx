@@ -10,7 +10,7 @@ interface SongProps {
   duration: number;
 }
 
-const Song: FC<SongProps> = ({ name, artists, coverUrl, position, album, releaseDate, duration }) => {
+const Tracks: FC<SongProps> = ({ name, artists, coverUrl, position, album, releaseDate, duration }) => {
 
   const minutes = Math.floor(duration / 60000);
   const seconds = ((duration % 60000) / 1000).toFixed(0);
@@ -30,4 +30,4 @@ const Song: FC<SongProps> = ({ name, artists, coverUrl, position, album, release
   );
 };
 
-export default Song;
+export default Tracks;
