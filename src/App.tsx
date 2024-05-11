@@ -4,7 +4,7 @@ import { FC, ReactElement, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { authSelectors } from "./containers/auth/selectors";
 import Header from "./Components/Header";
-import Playlists from "./Components/Playlists";
+import Playlists from "./Components/Playlist/Playlists";
 import SearchBar from "./Components/SearchBar";
 import { ThemeContext } from "./Components/ThemeContext";
 
