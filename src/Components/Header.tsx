@@ -1,6 +1,8 @@
 import React, { FC, ReactElement, useContext } from "react";
+import IconButton from '@mui/material/IconButton';
 import { useGetUserQuery } from "../api/apiSlice";
 import { ThemeContext } from "./ThemeContext";
+import { Brightness4, Brightness7 } from "@mui/icons-material";
 
 interface HeaderProps {
   accessToken: string | undefined;
@@ -30,12 +32,9 @@ const Header: FC<HeaderProps> = ({ accessToken }): ReactElement => {
         <header>
           <h1>Welcome to Listify, {user?.display_name} !</h1>
         </header>
-        <div className="custom-control custom-switch">
-          <input type="checkbox" className="custom-control-input" id="darkSwitch" checked={theme === "dark"} onChange={toggleTheme}/>
-          <label className="custom-control-label" htmlFor="darkSwitch">
-            Dark Mode
-          </label>
-        </div>
+        <IconButton onClick={toggleTheme} color="inherit">
+          {theme === 'light' ? <Brightness4 /> : <Brightness7 />}
+        </IconButton>
       </div>
     </div>
   );

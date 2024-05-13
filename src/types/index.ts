@@ -1,3 +1,5 @@
+import { ReactElement } from "react";
+
 export type User = {
   country: string;
   display_name: string;
@@ -258,3 +260,5 @@ export type SpotifyTrackItem = {
   uri: string;
   is_local: boolean;
 };
+
+export type ChildrenFunc = (sortedTracks: any[]) => ReactElement;

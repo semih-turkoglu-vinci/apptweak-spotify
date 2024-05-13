@@ -48,6 +48,14 @@ export const apiSlice = createApi({
         return response.tracks.items;
       },
     }),
+    getSortedPlaylist: builder.mutation<string, { playlistId: string | undefined, uris: string[] }>({
+      query: ({ playlistId, uris }) => ({
+        url: `/playlists/${playlistId}/tracks`,
+        method: 'PUT',
+        body: { uris }
+      }),
+      transformResponse: (response: { snapshot_id: string }) => response.snapshot_id,
+    })
   }),
 });
 
@@ -56,6 +64,7 @@ export const {
   useGetPlaylistsQuery,
   useGetPlaylistTracksQuery,
   useGetSearchTrackResultQuery,
+  useGetSortedPlaylistMutation,
 } = apiSlice;
 
 export default apiSlice.reducer;

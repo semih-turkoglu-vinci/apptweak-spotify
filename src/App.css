@@ -6,7 +6,7 @@
   --color-background-light: #FFFFFF;
   --color-text-light: #000000;
 
-  --color-background-dark: #000000;
+  --color-background-dark: #343a40;
   --color-text-dark: #FFFFFF;
 }
 
@@ -71,6 +71,7 @@ body{
   border-color: #007bff;
   box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
 }
+
 
 
 
